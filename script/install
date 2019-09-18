@@ -7,12 +7,18 @@ cd "$(dirname "$0")/.."
 echo "=> Installing shutdown listener...\n"
 sudo cp listen-for-shutdown.py /usr/local/bin/
 sudo chmod +x /usr/local/bin/listen-for-shutdown.py
+sudo cp blink-status-led.py /usr/local/bin/
+sudo chmod +x /usr/local/bin/blink-status-led.py
 
 echo "=> Starting shutdown listener...\n"
 sudo cp listen-for-shutdown.sh /etc/init.d/
 sudo chmod +x /etc/init.d/listen-for-shutdown.sh
+sudo cp blink-status-led.sh /etc/init.d/
+sudo chmod +x /etc/init.d/blink-status-led.sh
 
 sudo update-rc.d listen-for-shutdown.sh defaults
 sudo /etc/init.d/listen-for-shutdown.sh start
 
+sudo update-rc.d blink-status-led.sh defaults
+sudo /etc/init.d/blink-status-led.sh start
 echo "Shutdown listener installed."
